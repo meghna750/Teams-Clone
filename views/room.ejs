@@ -3,7 +3,8 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Document</title>
+   <title>Video Chat|Meeting</title>
+   <link rel="icon" href="https://image.flaticon.com/icons/png/512/1177/1177925.png" type="image/x-icon">
    <script>
       const ROOM_ID = "<%= roomId %>"
    </script>
@@ -15,21 +16,11 @@
    <link rel="stylesheet" href="style.css">
    <script src="https://kit.fontawesome.com/c939d0e917.js"></script>
    <script src="script.js" defer></script>
-   <style>
-      #video-grid{
-         display: flex;
-         justify-content: center;
-         flex-wrap: wrap;
-      }
-      video{
-         height: 300px;
-         width: 400px;
-         object-fit: cover;
-         padding: 8px;
-      }
-   </style>
 </head>
 <body>
+   <script>let val = prompt('Please Enter Your Name');
+      usernamee=val;
+   </script>
    <div class="main">
       <div class="main__left">
          <div class="main__videos">
@@ -49,22 +40,54 @@
                </div>
             </div>
             <div class="main__controls__block">
-               <div class="main__controls__button">
+               <!-- <div class="main__controls__button">
                   <i class="fas fa-shield-alt"></i>
                   <span>Security</span>
-               </div>
+               </div> -->
+               
                <div class="main__controls__button">
+                  <i class="fas fa-envelope-open"></i>
+                  <a href="mailto:meghbarn1002@gmail.com"><span>Contact Us</span></a>
+               </div>
+               <!-- <div class="main__controls__button">
                   <i class="fas fa-user-friends"></i>
                   <span>Participants</span>
-               </div>
-               <div class="main__controls__button">
+               </div> -->
+               <!-- <div class="main__controls__button">
                   <i class="fas fa-comment-alt"></i>
                   <span>Chat</span>
+               </div> -->
+               <div class="main__controls__button">
+                  <i class="fas fa-edit"></i>
+                  <a href="https://docs.google.com/document/u/0/" target="_blank"><span>Make Meeting Notes </span></a>
+               </div>
+               <div class="main__controls__button">
+                  <i class="fas fa-id-badge"></i>
+                  <div class="popup" onclick="AboutUsPopupFunction()">About Us 
+                     <span class="popuptext" id="AboutUsPopup">This is a website built by MEGHNA BARNWAL under Microsoft
+                        engage program. My purpose is to sevre you a platform where you can connect with your friends 
+                        virtually (I KNOW YOU ARE FED OF VIRTUAL MEETINS 😟 ) <br/>
+                        Click <a href="https://www.linkedin.com/in/meghna-barn123/"><strong>here </strong> </a> to 
+                        connect with me and share your experiences about this application. I will love to hear 
+                        from <strong> YOU!</strong>
+                     </span>
+                  </div>
+                  <!-- <span class="popuptext" id="myPopup">About us </span> -->
+               </div>
+               <div class="main__controls__button">
+                  <i class="fas fa-user-plus"></i>
+                  <div class="popup" onclick="InviteFriendsPopupFunction()">
+                     How to Invite friends?  
+                     <span class="popuptext" id="InviteFriendsPopup">Copy the link of this window tab and share with 
+                        your friends!
+                     </span>
+                  </div>
+                  <!-- <span class="popuptext" id="myPopup">About us </span> -->
                </div>
             </div>
             <div class="main__controls__block">
                <div class="main__controls__button">
-                  <span class="leave_meeting">Leave Meeting</span>
+                  <a onclick="LeaveMeetingAlert()" id="leaveMeetingLink"><span class="leave_meeting">Leave Meeting</span></a> 
                </div>
             </div>
          </div>
@@ -84,5 +107,25 @@
          </div>
       </div>
    </div>
+   <script>
+      // When the user clicks on div, open the popup
+      function AboutUsPopupFunction() {
+        var popup = document.getElementById("AboutUsPopup");
+        popup.classList.toggle("show");
+      }
+      function InviteFriendsPopupFunction() {
+         var popup = document.getElementById("InviteFriendsPopup");
+         popup.classList.toggle("show");
+      }
+      function LeaveMeetingAlert() {
+         var doc;var result = confirm("Do you really want to leave meeting?");
+            if (result == true) {
+                doc = "/thankssss";
+            } else {
+                doc = "#";
+            }
+            document.getElementById("leaveMeetingLink").href=doc;
+      }
+   </script>
 </body>
 </html>
