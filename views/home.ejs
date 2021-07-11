@@ -4,10 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Chat| Home</title>
+    <title>Chat Room|Home</title>
     <link rel="icon" href="https://image.flaticon.com/icons/png/512/1177/1177925.png" type="image/x-icon">
+    <link rel="stylesheet" href="videoChatStyle.css">
+    <style>
+        body{background-image: url('https://images.unsplash.com/photo-1432821596592-e2c18b78144f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80');
+        background-size: cover;font-family: 'Montserrat', sans-serif;}          
+    </style>
 </head>
-<body>
-    <a href="/room"><button>Start New Meeting</button></a>
+<body class="home-body">
+    <div class="homeHeadingDiv">
+    <h1 class="homeHeading">Welcome to our Chat room application 💙  <br>  
+        We try our best to give to make your experience better 😇 <br>
+    </h1>
+    </div>
+    <div class="homebuttons">
+    <a href="/index" style="color: aliceblue;display: inline-block;"><button class="HomePageButton">Join New Chat Room
+        <span class="tooltiptext">Jump into chat room and start meeting when you are ready to go.</span>
+    </button>
+    </a><br>
+    <!-- <a href="/room" style="color: aliceblue;display: inline-block;"><button class="NewMeetingButton">Start New11 Meeting</button></a> -->
+    <!-- <p> Enter chat room and start meeting whenever you want. </p><br> <br> -->
+    <a href="/instantroom" style="color: aliceblue;display: inline-block;"><button class="HomePageButton">Start Instant Meeting
+        <span class="tooltiptext">Start meeting without jumping into Chatroom</span>
+    </button>
+    </a><br><br>
+    <a href="mailto:meghbarn1002@gmail.com" style="color: aliceblue;display: inline-block;"><button class="HomePageButton">Contact Us</button></a>
+    <button onclick="goBack()" class="HomePageButton">Back</button>
+    </div>
+    <div class="homefooter">
+        <p>This Web Application Is Built By Meghna Barnwal Under Microsoft Engage Mentorship Program. <br>
+            We thank Mr.Rohank Ankaridhakari Bora and Mr.Osho Bajpayee for their constant help and support. 😇 
+        </p>
+        <p> &copy; MEGHNA BARNWAL</p>
+    </div>
+    
+    <script>
+    function goBack() {
+    window.history.back();
+    }
+    </script>
 </body>
 </html>

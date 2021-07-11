@@ -1,10 +1,7 @@
+
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
-// const myPeer = new Peer(undefined, {
-//   path: '/peerjs',
-//   host: '/',
-//   port: '443'
-// })
+
 const myPeer = new Peer(undefined, { host: "peerjs-server.herokuapp.com", secure: true, port: 443, });
 
 let myVideoStream;
@@ -13,7 +10,11 @@ myVideo.muted = true;
 const peers = {}
 navigator.mediaDevices.getUserMedia({
   video: true,
-  audio: true
+  audio: true,
+  audio: {
+    echoCancellation: true,
+    noiseSuppression: true
+  }
 }).then(stream => {
   myVideoStream = stream;
   addVideoStream(myVideo, stream)
@@ -39,7 +40,7 @@ navigator.mediaDevices.getUserMedia({
   });
   let usernamee="";
   socket.on("createMessage", message => {
-    $("ul").append(`<li class="message"><b>${usernamee}</b><br/>${message}</li>`);
+    $("ul").append(`<li class="message"><b>User</b><br/>${message}</li>`);
     scrollToBottom()
   })
 })
@@ -129,4 +130,26 @@ const setPlayVideo = () => {
     <span>Play Video</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
+}
+
+function  shareScreen() {
+       return navigator.mediaDevices.getDisplayMedia( {
+         video: {
+            cursor: "always"
+        },
+        audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+        }
+    } ).then((stream)=>{
+    let getVideoTrack=stream.getVideoTracks()[0];
+    console.log(getVideoTrack)
+    let sender =myPeer.getSenders().find(function(s){
+       return s.track.kind==videoTrack.kind
+    })
+    sender.replaceTrack(myVideo)
+    }).catch((err)=>{
+       console.log("unable to get displaymedia" +err)
+    })
+   
 }
