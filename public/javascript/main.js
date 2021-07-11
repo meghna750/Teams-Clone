@@ -1,3 +1,4 @@
+// JAVASCRIPT FOR CHAT PAGE AND CHAT ENTRANCE PAGE  
 const chatForm = document.getElementById('chat-form');
 const chatMessages = document.querySelector('.chat-messages');
 const roomName = document.getElementById('room-name');
@@ -13,18 +14,23 @@ const { username, room } = Qs.parse(location.search, {
 const socket = io();
 
 /**
- * 
+ * function to send message to all users of that room that a user with username has joined
  */
 socket.emit('joinRoom', { username, room });
 
-// Get room and users
+
+/**
+ * function to get room name and users 
+ */
 socket.on('roomUsers', ({ room, users }) => {
   outputRoomName(room);
   outputUsers(users);
 });
 
 
-// Message from server
+/**
+ * 
+ */
 socket.on('message', (message) => {
   console.log(message);
   outputMessage(message);

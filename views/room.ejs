@@ -1,3 +1,4 @@
+<!-- VIDEO CHAT MAIN PAGE  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,7 +111,8 @@
       </div>
    </div>
    <script>
-      // When the user clicks on div, open the popup
+
+      // copy url to clipboard
       function Copy() {
          var inputc = document.body.appendChild(document.createElement("input"));
          inputc.value = window.location.href;
@@ -120,6 +122,7 @@
          inputc.parentNode.removeChild(inputc);
          alert("URL Copied.");
        }
+       // Onclick popups
       function AboutUsPopupFunction() {
         var popup = document.getElementById("AboutUsPopup");
         popup.classList.toggle("show");

@@ -1,3 +1,4 @@
+// JAVASCRIPT FOR VIDEOCALL PAGE 
 
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
@@ -8,6 +9,11 @@ let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
 const peers = {}
+
+
+/**
+ * 
+ */
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true,
@@ -45,14 +51,29 @@ navigator.mediaDevices.getUserMedia({
   })
 })
 
+
+/**
+ * 
+ * 
+ */
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
 })
 
+/**
+ * 
+ * 
+ */
 myPeer.on('open', id => {
   socket.emit('join-room', ROOM_ID, id)
 })
 
+
+/**
+ * 
+ * @param {*} userId 
+ * @param {*} stream 
+ */
 function connectToNewUser(userId, stream) {
   const call = myPeer.call(userId, stream)
   const video = document.createElement('video')
@@ -66,6 +87,12 @@ function connectToNewUser(userId, stream) {
   peers[userId] = call
 }
 
+
+/**
+ * 
+ * @param {*} video 
+ * @param {*} stream 
+ */
 function addVideoStream(video, stream) {
   video.srcObject = stream
   video.addEventListener('loadedmetadata', () => {
@@ -78,6 +105,10 @@ const scrollToBottom = () => {
   d.scrollTop(d.prop("scrollHeight"));
 }
 
+
+/**
+ *  FUNCTION TO GIVE USER AN OPTION TO MUTE / UNMUTE HIMSELF/HERSELF
+ */
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
   if (enabled) {
@@ -88,6 +119,10 @@ const muteUnmute = () => {
     myVideoStream.getAudioTracks()[0].enabled = true;
   }
 }
+
+/**
+ * FUNCTION TO GIVE USER OPTION TO TURN HIS CAMERA ON / OFF
+ */
 const playStop = () => {
     console.log('object')
     let enabled = myVideoStream.getVideoTracks()[0].enabled;
@@ -100,6 +135,9 @@ const playStop = () => {
     }
   }
 
+/**
+ * SETTING MUTE BUTTON, ITS STYLES AND INNER TEXT TO DISPLAY
+ */
 const setMuteButton = () => {
   const html = `
     <i class="fas fa-microphone"></i>
@@ -108,6 +146,10 @@ const setMuteButton = () => {
   document.querySelector('.main__mute_button').innerHTML = html;
 }
 
+
+/**
+ * SETTING UNMUTE BUTTON, ITS STYLE AND INNER TEXT TO DISPLAY
+ */
 const setUnmuteButton = () => {
   const html = `
     <i class="unmute fas fa-microphone-slash"></i>
@@ -116,6 +158,9 @@ const setUnmuteButton = () => {
   document.querySelector('.main__mute_button').innerHTML = html;
 }
 
+/**
+ * SETTING TURN OFF VIDEO BUTTON, ITS STYLE AND TEXT TO DISPLAY
+ */
 const setStopVideo = () => {
   const html = `
     <i class="fas fa-video"></i>
@@ -124,6 +169,10 @@ const setStopVideo = () => {
   document.querySelector('.main__video_button').innerHTML = html;
 }
 
+
+/**
+ * 
+ */
 const setPlayVideo = () => {
   const html = `
   <i class="stop fas fa-video-slash"></i>
@@ -132,6 +181,11 @@ const setPlayVideo = () => {
   document.querySelector('.main__video_button').innerHTML = html;
 }
 
+
+/**
+ * 
+ * @returns 
+ */
 function  shareScreen() {
        return navigator.mediaDevices.getDisplayMedia( {
          video: {
@@ -151,5 +205,4 @@ function  shareScreen() {
     }).catch((err)=>{
        console.log("unable to get displaymedia" +err)
     })
-   
 }

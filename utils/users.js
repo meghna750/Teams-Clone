@@ -1,6 +1,12 @@
 const users = [];
 
-// Join user to chat
+/**
+ * 
+ * @param {} id particular user's userid
+ * @param {text input by user} username username that user had entered
+ * @param {text input by user} room room where user wants to land
+ * @returns a user after alloting it room name, username and user id
+ */
 function userJoin(id, username, room) {
   const user = { id, username, room };
 
@@ -9,12 +15,23 @@ function userJoin(id, username, room) {
   return user;
 }
 
-// Get current user
+
+/**
+ * 
+ * @param {id of user} id here it works as primary key to identify user
+ * @returns index where particular id was found
+ */
 function getCurrentUser(id) {
   return users.find(user => user.id === id);
 }
 
-// User leaves chat
+
+/**
+ * 
+ * @param {*} id the particular user's id
+ * @returns index where userid was found( if it was found )
+ * purpose: if user is present in room then remove him/her from users list
+ */
 function userLeave(id) {
   const index = users.findIndex(user => user.id === id);
 
@@ -23,11 +40,18 @@ function userLeave(id) {
   }
 }
 
-// Get room users
+/**
+ * 
+ * @param {room name input by user} room the particular room name where user wants to land
+ * @returns users of that perticular room 
+ */
 function getRoomUsers(room) {
   return users.filter(user => user.room === room);
 }
 
+/**
+ * export the functions required
+ */
 module.exports = {
   userJoin,
   getCurrentUser,
