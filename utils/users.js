@@ -3,8 +3,8 @@ const users = [];
 /**
  * 
  * @param {} id particular user's userid
- * @param {text input by user} username username that user had entered
- * @param {text input by user} room room where user wants to land
+ * @param {string} username username that user had entered
+ * @param {string} room room where user wants to land
  * @returns a user after alloting it room name, username and user id
  */
 function userJoin(id, username, room) {

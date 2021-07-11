@@ -1,8 +1,10 @@
 // JAVASCRIPT FOR VIDEOCALL PAGE 
 
+//give reference to socket and pass the path that we are going to call
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 
+// create a new peer connecting to our own server
 const myPeer = new Peer(undefined, { host: "peerjs-server.herokuapp.com", secure: true, port: 443, });
 
 let myVideoStream;
@@ -12,7 +14,7 @@ const peers = {}
 
 
 /**
- * 
+ * CONNECT TO AUDIO AND VIDEO OF USERS
  */
 navigator.mediaDevices.getUserMedia({
   video: true,
@@ -25,13 +27,14 @@ navigator.mediaDevices.getUserMedia({
   myVideoStream = stream;
   addVideoStream(myVideo, stream)
   myPeer.on('call', call => {
+    // once the user is connected append his/her video to display
     call.answer(stream)
     const video = document.createElement('video')
     call.on('stream', userVideoStream => {
       addVideoStream(video, userVideoStream)
     })
   })
-
+  //new user's video is appended if he/she enters the meeting
   socket.on('user-connected', userId => {
     connectToNewUser(userId, stream)
   })
@@ -44,8 +47,8 @@ navigator.mediaDevices.getUserMedia({
       text.val('')
     }
   });
-  let usernamee="";
   socket.on("createMessage", message => {
+    //appending message sent by user to the list of messages
     $("ul").append(`<li class="message"><b>User</b><br/>${message}</li>`);
     scrollToBottom()
   })
@@ -54,14 +57,16 @@ navigator.mediaDevices.getUserMedia({
 
 /**
  * 
- * 
+ * if user leaves the meeting closes the data connection gracefully, 
+ * cleaning up underlying DataChannels and PeerConnections.
  */
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
 })
 
 /**
- * 
+ * Emitted when a connection to the PeerServer is established. 
+ * id is the brokering ID of the peer 
  * 
  */
 myPeer.on('open', id => {
@@ -71,7 +76,7 @@ myPeer.on('open', id => {
 
 /**
  * 
- * @param {*} userId 
+ * @param {string} userId 
  * @param {*} stream 
  */
 function connectToNewUser(userId, stream) {
@@ -90,11 +95,13 @@ function connectToNewUser(userId, stream) {
 
 /**
  * 
- * @param {*} video 
- * @param {*} stream 
+ * @param {*} video NEW USER'S VIDEO WHICH WE ARE GOING TO APPEND TO VIDEOGRID
+ * @param {*} stream SOURCE OF THE MEDIA WE ARE TRYING TO FETCH (AUDIO AND VIDEO)
  */
 function addVideoStream(video, stream) {
-  video.srcObject = stream
+
+  video.srcObject = stream  // allows us to play our video
+
   video.addEventListener('loadedmetadata', () => {
     video.play()
   })
@@ -107,7 +114,7 @@ const scrollToBottom = () => {
 
 
 /**
- *  FUNCTION TO GIVE USER AN OPTION TO MUTE / UNMUTE HIMSELF/HERSELF
+ *  FUNCTION TO GIVE USER AN OPTION TO MUTE/UNMUTE HIMSELF/HERSELF
  */
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
@@ -171,7 +178,7 @@ const setStopVideo = () => {
 
 
 /**
- * 
+ * SETTING TURN ON VIDEO BUTTON, ITS STYLE AND TEXT TO DISPLAY
  */
 const setPlayVideo = () => {
   const html = `
@@ -184,7 +191,8 @@ const setPlayVideo = () => {
 
 /**
  * 
- * @returns 
+ * @returns A Promise whose fulfillment handler receives a MediaStream object when the requested media
+ *  has successfully been obtained.
  */
 function  shareScreen() {
        return navigator.mediaDevices.getDisplayMedia( {

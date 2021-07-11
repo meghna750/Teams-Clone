@@ -66,7 +66,7 @@ chatForm.addEventListener('submit', (e) => {
 
 /**
  * 
- * @param {input} message the message which user has sent
+ * @param {string} message the message which user has sent
  * message.username - the user who sent the message
  * message.time - the time at which user sent the message
  */
@@ -87,7 +87,7 @@ function outputMessage(message) {
 
 /**
  * 
- * @param {*} room The name name of room which user has joined 
+ * @param {string} room The name name of room which user has joined 
  */
 function outputRoomName(room) {
   roomName.innerText = room;
