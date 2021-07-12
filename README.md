@@ -24,7 +24,9 @@ Video Call Page:
 
 ![Screenshot (203)](https://user-images.githubusercontent.com/58587542/125223823-08098b80-e2ea-11eb-9b6d-c4d567106adb.png)
 
-I have used NodeJS, ExpressJS , MomentJS , Socket.IO , WEBRTC ,PeerJS , UUID (to generate random urls for meetings) along with HTML and CSS .
+I have used NodeJS, ExpressJS , MomentJS , Socket.IO ( for realtime chat functionality), WEBRTC ,PeerJS , UUID (to generate random urls for meetings) along with HTML and CSS .
+
+I have taken reference from - Wbe Dev Simplified, Stack oveeflow(whenever I got stuck it saved me :) ), Traversy Media .
 
 I would like to thank Mr.Osho Bajpai and Mr.Rohan Ankarigari for their constant help and support.
 
