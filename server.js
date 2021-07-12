@@ -22,7 +22,7 @@ app.use(cors());
 // Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-const botName = 'Your Chat Room Bot';
+const botName = 'Your Bot UTC-';
 
 // Run when client connects
 io.on('connection', socket => {
@@ -82,11 +82,7 @@ app.get('/',(req,res)=>{
 })
 app.get('/index',(req,res)=> {
   res.sendFile(__dirname + "/views/index.html");
-  //  res.render('home');
 });
-// app.get('/instantroom',(req,res)=>{
-//   res.render('instantroom');
-// })
 app.get('/window.history.go(-1)',(req,res)=>{
   res.render('window.history.go(-1)');
 })
@@ -96,12 +92,7 @@ app.get('/home', (req, res) => {
 app.get('/room', (req, res) => {
   res.redirect(`/${uuidV4()}`)
 })
-// app.get('/instantroom', (req, res) => {
-//   res.redirect(`/${uuidV4()}`)
-// })
-// app.get('/:instantroom', (req, res) => {
-//   res.render('instantroom', { roomId: req.params.room })
-// })
+
 app.get('/:room', (req, res) => {
   res.render('room', { roomId: req.params.room })
 })
