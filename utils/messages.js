@@ -1,6 +1,8 @@
 const moment = require('moment');
 
+moment().utcOffset("+05:30").format('hh:mm')
 
+moment.utc() || new Date()
 /**
  * 
  * @param {string} username username of particular user whi sent the message
